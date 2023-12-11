@@ -56,7 +56,7 @@ const range = (start, end, base, value) => {
 const SLEEPING = "💤 Sleeping...";
 const BUSY = "⚠️ Busy. ⛔ Do Not Disturb";
 const AVAILABLE = "✅ Available for messaging only, calls will be declined 📵";
-const WEEKEND = "✨ Enjoying my weekend. 📳 Don't contact me unless it's urgent";
+const WEEKEND = "✨ On a weekend. 📳 Enjoying real life 🏞️";
 
 const schedule = {
     ...range(1, 5, 7, {
@@ -66,7 +66,7 @@ const schedule = {
         }),
         ...range(7, 17, 24, {
             message: BUSY,
-            dnd: true,
+            dnd: false,
         }),
         ...range(18, 23, 24, {
             message: AVAILABLE,
@@ -76,7 +76,7 @@ const schedule = {
     ...range(6, 7, 7, {
         ...range(0, 23, 24, {
             message: WEEKEND,
-            dnd: true
+            dnd: false
         }),
     }),
 };
