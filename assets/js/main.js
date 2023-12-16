@@ -55,8 +55,9 @@ const range = (start, end, base, value) => {
 
 const SLEEPING = "💤 Sleeping...";
 const BUSY = "⚠️ Busy. ⛔ Do Not Disturb";
-const AVAILABLE = "✅ Available for messaging only, calls will be declined 📵";
+const AVAILABLE = "✅ Available for messaging, calls will be declined 📵";
 const WEEKEND = "✨ On a weekend. 📳 Enjoying real life 🏞️";
+const HOLYDAY = "🎉 It's a holyday! 🛫 Unavaliable today, enjoying a great time with my family 👨‍👩‍👧‍👦️";
 
 const schedule = {
     ...range(1, 5, 7, {
@@ -72,6 +73,7 @@ const schedule = {
             message: AVAILABLE,
             dnd: false,
         }),
+        ...range()
     }),
     ...range(6, 7, 7, {
         ...range(0, 23, 24, {
@@ -113,7 +115,7 @@ for (const link of contactLinks) {
 
         if (status.dnd) {
             event.preventDefault();
-            showPopup("Please, contact me later.", true)
+            showPopup("Please, contact me later. I'm sleeping", true)
         }
     })
 }
