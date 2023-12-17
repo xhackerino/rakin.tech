@@ -62,7 +62,8 @@ const WEEKEND = "✨ On a weekend. 📳 Enjoying real life 🏞️";
 const HOLIDAY = "🎉 On a holiday celebration with my family!";
 
 const fixedHolidays = {
-    '01-01': 'New Year\'s Day (Feast of the Circumcision of Christ)',
+    '01-01': 'Feast of the Circumcision of Christ (New Year\'s Day)',
+    '01-02': 'Saint Basil\'s Day (New Year\'s 2nd Day)',
     '01-06': 'Epiphany (Three Kings’ Day)',
     '02-02': 'Candlemas (Presentation of Jesus at the Temple)',
     '02-14': 'Saint Valentine\'s Day',
@@ -95,8 +96,9 @@ const fixedHolidays = {
     '12-24': 'Christmas Eve',
     '12-25': 'Christmas Day',
     '12-26': 'Saint Stephen\'s Day',
-    '12-17': 'My Dad\'s Birthday',
     '12-28': 'Holy Innocents\' Day',
+    '12-29': 'My Dad\'s Birthday',
+    '12-31': 'New Year\'s Eve',
 };
 
 function calculateEaster(year) {
