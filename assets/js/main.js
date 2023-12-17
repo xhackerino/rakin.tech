@@ -127,7 +127,6 @@ const movableHolidays = {
 // Combine fixed and movable holidays
 const holidays = {...fixedHolidays, ...movableHolidays};
 
-
 const schedule = {
     ...range(1, 5, 7, {
         ...range(0, 6, 24, {
@@ -177,6 +176,36 @@ setInterval(() => {
     }
 }, 1000);
 
+let songs = [];
+
+function loadSongs() {
+    fetch('../songs.json')  // Update the path to your songs.json file
+        .then(response => response.json())
+        .then(data => {
+            songs = data;
+            updateSongStatus();  // Initial song status update
+        })
+        .catch(error => console.error('Error loading songs:', error));
+}
+
+function getRandomSong() {
+    if (songs.length === 0) return 'No song available';
+    const randomIndex = Math.floor(Math.random() * songs.length);
+    return `${songs[randomIndex].title} by ${songs[randomIndex].artist}`;
+}
+
+function updateSongStatus() {
+    const currentSong = getRandomSong();
+    const songStatusElement = document.querySelector("#song-status");
+    if (songStatusElement) {
+        songStatusElement.textContent = `Currently listening to: 🎵 ${currentSong}`;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    loadSongs();
+    setInterval(updateSongStatus, 300000); // 300000 milliseconds = 5 minutes
+});
 
 const copyElements = document.querySelectorAll(".copy");
 
