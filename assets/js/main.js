@@ -147,7 +147,7 @@ const schedule = {
     ...range(6, 7, 7, {
         ...range(0, 23, 24, {
             message: WEEKEND,
-            dnd: false
+            dnd: true,
         }),
     }),
 };
