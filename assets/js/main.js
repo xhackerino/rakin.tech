@@ -1,3 +1,9 @@
+
+ChatGPT
+Certainly! I'll integrate the holiday functionality into your existing JavaScript code. Here's the full code with the necessary modifications:
+
+    javascript
+Copy code
 "use strict";
 
 const showPopup = (() => {
@@ -9,7 +15,7 @@ const showPopup = (() => {
         { opacity: 1, offset: 0 },
         { opacity: 0, offset: 0.4 },
         { opacity: 0, offset: 0.6 },
-        { opacity: 1, offset: 1 },  
+        { opacity: 1, offset: 1 },
     ];
 
     const sleep = async (ms) => new Promise(resolve => {
@@ -41,6 +47,8 @@ const showPopup = (() => {
 
 const now = () => new Date();
 
+const year = now().getUTCFullYear();
+
 const range = (start, end, base, value) => {
     const keys = Array.from(
         { length: end - start + 1 },
@@ -57,7 +65,67 @@ const SLEEPING = "💤 Sleeping...";
 const BUSY = "⚠️ Busy. ⛔ Do Not Disturb";
 const AVAILABLE = "✅ Available for messaging, calls will be declined 📵";
 const WEEKEND = "✨ On a weekend. 📳 Enjoying real life 🏞️";
-const HOLYDAY = "🎉 It's a holyday! 🛫 Unavaliable today, enjoying a great time with my family 👨‍👩‍👧‍👦️";
+const HOLIDAY = "🎉 It's a holiday! Unavailable today, enjoying a great time with my family 👨‍👩‍👧‍👦️";
+
+const fixedHolidays = {
+    '01-01': 'New Year\'s Day (Feast of the Circumcision of Christ)',
+    '01-06': 'Epiphany (Three Kings’ Day)',
+    '02-02': 'Candlemas (Presentation of Jesus at the Temple)',
+    '02-14': 'Saint Valentine\'s Day',
+    '03-17': 'Saint Patrick\'s Day',
+    '03-19': 'Saint Joseph\'s Day',
+    '03-25': 'Annunciation',
+    '04-23': 'Saint George\'s Day',
+    '04-25': 'Saint Mark\'s Day',
+    '05-01': 'Saint James the Great Day',
+    '05-31': 'Visitation of Mary',
+    '06-24': 'Nativity of Saint John the Baptist',
+    '06-29': 'Saints Peter and Paul\'s Day',
+    '07-25': 'Saint James the Great Day',
+    '08-06': 'Transfiguration of Jesus',
+    '08-15': 'Assumption of Mary (Assumption Day)',
+    '09-14': 'Holy Cross Day',
+    '09-29': 'Michaelmas (Feast of Saint Michael and All Angels)',
+    '10-04': 'Saint Francis of Assisi Day',
+    '10-18': 'Saint Luke\'s Day',
+    '10-31': 'Reformation Day',
+    '11-01': 'All Saints\' Day',
+    '11-02': 'All Souls\' Day',
+    '11-30': 'Saint Andrew\'s Day',
+    '12-06': 'Saint Nicholas Day',
+    '12-08': 'Feast of the Immaculate Conception',
+    '12-24': 'Christmas Eve',
+    '12-25': 'Christmas Day',
+    '12-26': 'Saint Stephen\'s Day (Boxing Day)',
+    '12-28': 'Holy Innocents\' Day',
+};
+
+function calculateEaster(year) {
+    const f = Math.floor,
+        // Golden Number - 1
+        G = year % 19,
+        C = f(year / 100),
+        // related to Epact
+        H = (C - f(C / 4) - f((8 * C + 13) / 25) + 19 * G + 15) % 30,
+        // number of days from 21 March to the Paschal full moon
+        I = H - f(H / 28) * (1 - f(29 / (H + 1)) * f((21 - G) / 11)),
+        // weekday for the Paschal full moon
+        J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7,
+        // number of days from 21 March to the Sunday on or before the Paschal full moon
+        L = I - J,
+        month = 3 + f((L + 40) / 44),
+        day = L + 28 - 31 * f(month / 4);
+
+    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+}
+
+const movableHolidays = {
+    [calculateEaster(year)]: 'Easter Sunday',
+};
+
+// Combine fixed and movable holidays
+const holidays = { ...fixedHolidays, ...movableHolidays };
+
 
 const schedule = {
     ...range(1, 5, 7, {
@@ -85,15 +153,29 @@ const schedule = {
 
 const statusContainer = document.querySelector("#status");
 
-setInterval(() => {
-    const day = now().getUTCDay();
-    const hour = now().getUTCHours();
+// Function to format date in 'MM-DD' format
+const formatDate = (date) => {
+    return `${date.getUTCMonth() + 1}`.padStart(2, '0') + '-' + `${date.getUTCDate()}`.padStart(2, '0');
+}
 
-    const status = schedule[day][hour];
-    if (status !== statusContainer.textContent) {
-        statusContainer.textContent = status.message;
+setInterval(() => {
+    const currentDate = now();
+    const formattedDate = formatDate(currentDate);
+    const dayOfWeek = currentDate.getUTCDay();
+    const hour = currentDate.getUTCHours();
+
+    // Check if today is a holiday
+    if (holidays[formattedDate]) {
+        statusContainer.textContent = `${HOLYDAY} Celebrating ${holidays[formattedDate]}`;
+    } else {
+        // Existing schedule logic
+        const status = schedule[dayOfWeek][hour];
+        if (status !== statusContainer.textContent) {
+            statusContainer.textContent = status.message;
+        }
     }
 }, 1000);
+
 
 const copyElements = document.querySelectorAll(".copy");
 
