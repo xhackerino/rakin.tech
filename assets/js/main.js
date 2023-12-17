@@ -77,7 +77,7 @@ const fixedHolidays = {
     '05-31': 'Visitation of Mary',
     '06-24': 'Nativity of Saint John the Baptist',
     '06-29': 'Saints Peter and Paul\'s Day',
-    '07-17': 'My Sister\'s Birthday',
+    '07-17': 'my Sister\'s Birthday',
     '07-20': 'Saint Elijah\'s the Prophet Day',
     '07-25': 'Saint James the Great Day',
     '07-29': 'my Birthday!',
@@ -97,7 +97,7 @@ const fixedHolidays = {
     '12-25': 'Christmas Day',
     '12-26': 'Saint Stephen\'s Day',
     '12-28': 'Holy Innocents\' Day',
-    '12-29': 'My Dad\'s Birthday',
+    '12-29': 'my Dad\'s Birthday',
     '12-31': 'New Year\'s Eve',
 };
 
