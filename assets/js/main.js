@@ -179,7 +179,7 @@ setInterval(() => {
 let songs = [];
 
 function loadSongs() {
-    fetch('../songs.json')  // Update the path to your songs.json file
+    fetch('songs.json')  // Update the path to your songs.json file
         .then(response => response.json())
         .then(data => {
             songs = data;
