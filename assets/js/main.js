@@ -179,15 +179,14 @@ setInterval(() => {
 let songs = [];
 
 function loadSongs() {
-    fetch('songs.json')  // Update the path to your songs.json file
+    fetch('assets/songs.json')  // Ensure the path to your songs.json file is correct
         .then(response => response.json())
         .then(data => {
             songs = data;
-            updateSongStatus();  // Initial song status update
+            setInterval(updateSongStatus, 240000); // 240000 milliseconds = 4 minutes
         })
         .catch(error => console.error('Error loading songs:', error));
 }
-
 function getRandomSong() {
     if (songs.length === 0) return 'No song available';
     const randomIndex = Math.floor(Math.random() * songs.length);
@@ -195,16 +194,21 @@ function getRandomSong() {
 }
 
 function updateSongStatus() {
-    const currentSong = getRandomSong();
+    const now = new Date();
+    const hour = now.getHours();
     const songStatusElement = document.querySelector("#song-status");
-    if (songStatusElement) {
+
+    if (hour >= 4 && hour < 19) { // Between 11 AM and 7 PM
+        const currentSong = getRandomSong();
         songStatusElement.textContent = `Currently listening to: 🎵 ${currentSong}`;
+    } else {
+        songStatusElement.textContent = "Not currently playing any song";
     }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     loadSongs();
-    setInterval(updateSongStatus, 300000); // 300000 milliseconds = 5 minutes
+    updateSongStatus(); // Initial update
 });
 
 const copyElements = document.querySelectorAll(".copy");

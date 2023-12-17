@@ -1,8 +1,8 @@
 @font-face {
   font-family: "Hauss";
-  src: 
-    url(assets/fonts/hauss.ttf) format("truetype")
-    url(assets/fonts/hauss.woff) format("woff");
+  src:
+          url(assets/fonts/hauss.ttf) format("truetype")
+          url(assets/fonts/hauss.woff) format("woff");
 }
 
 :root {
@@ -73,7 +73,7 @@ mark:hover {
   display: inline-block;
   width: 1.4rem;
   height: 1.4rem;
-  
+
   background: url(/assets/svg/copy.svg) no-repeat;
 }
 
@@ -86,7 +86,7 @@ mark:hover {
   width: calc(100% - 80px);
   max-width: 600px;
   padding: 20px;
-  
+
   background-color: var(--text);
   color: var(--bg);
   font-weight: 600;
