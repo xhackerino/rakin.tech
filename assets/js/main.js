@@ -59,7 +59,7 @@ const SLEEPING = "💤 Sleeping...";
 const BUSY = "⚠️ Busy. ⛔ Do Not Disturb";
 const AVAILABLE = "✅ Available for messaging, calls will be declined 📵";
 const WEEKEND = "✨ On a weekend. 📳 Enjoying real life 🏞️";
-const HOLIDAY = "🎉 It's a holiday! Unavailable today, enjoying a great time with my family 👨‍👩‍👧‍👦️";
+const HOLIDAY = "🎉 On a holiday celebration with my family!";
 
 const fixedHolidays = {
     '01-01': 'New Year\'s Day (Feast of the Circumcision of Christ)',
@@ -72,10 +72,14 @@ const fixedHolidays = {
     '04-23': 'Saint George\'s Day',
     '04-25': 'Saint Mark\'s Day',
     '05-01': 'Saint James the Great Day',
+    '05-09': 'Europe Day',
     '05-31': 'Visitation of Mary',
     '06-24': 'Nativity of Saint John the Baptist',
     '06-29': 'Saints Peter and Paul\'s Day',
+    '07-17': 'My Sister\'s Birthday',
+    '07-20': 'Saint Elijah\'s the Prophet Day',
     '07-25': 'Saint James the Great Day',
+    '07-29': 'my Birthday!',
     '08-06': 'Transfiguration of Jesus',
     '08-15': 'Assumption of Mary (Assumption Day)',
     '09-14': 'Holy Cross Day',
@@ -88,10 +92,10 @@ const fixedHolidays = {
     '11-30': 'Saint Andrew\'s Day',
     '12-06': 'Saint Nicholas Day',
     '12-08': 'Feast of the Immaculate Conception',
-    '12-17': 'Ilia Rakin\'s Day',
     '12-24': 'Christmas Eve',
     '12-25': 'Christmas Day',
-    '12-26': 'Saint Stephen\'s Day (Boxing Day)',
+    '12-26': 'Saint Stephen\'s Day',
+    '12-17': 'My Dad\'s Birthday',
     '12-28': 'Holy Innocents\' Day',
 };
 
@@ -161,7 +165,7 @@ setInterval(() => {
 
     // Check if today is a holiday
     if (holidays[formattedDate]) {
-        statusContainer.textContent = `${HOLIDAY} Celebrating ${holidays[formattedDate]}`;
+        statusContainer.textContent = `${HOLIDAY} Today is ${holidays[formattedDate]} 👨‍👩‍👧‍👦`;
     } else {
         // Existing schedule logic
         const status = schedule[dayOfWeek][hour];
