@@ -161,7 +161,7 @@ setInterval(() => {
 
     // Check if today is a holiday
     if (holidays[formattedDate]) {
-        statusContainer.textContent = `${HOLYDAY} Celebrating ${holidays[formattedDate]}`;
+        statusContainer.textContent = `${HOLIDAY} Celebrating ${holidays[formattedDate]}`;
     } else {
         // Existing schedule logic
         const status = schedule[dayOfWeek][hour];
