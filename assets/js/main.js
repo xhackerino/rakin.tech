@@ -88,6 +88,7 @@ const fixedHolidays = {
     '11-30': 'Saint Andrew\'s Day',
     '12-06': 'Saint Nicholas Day',
     '12-08': 'Feast of the Immaculate Conception',
+    '12-17': 'Ilia Rakin\'s Day',
     '12-24': 'Christmas Eve',
     '12-25': 'Christmas Day',
     '12-26': 'Saint Stephen\'s Day (Boxing Day)',
