@@ -1,9 +1,3 @@
-
-ChatGPT
-Certainly! I'll integrate the holiday functionality into your existing JavaScript code. Here's the full code with the necessary modifications:
-
-    javascript
-Copy code
 "use strict";
 
 const showPopup = (() => {
@@ -12,10 +6,10 @@ const showPopup = (() => {
     const popupText = document.querySelector(".popup-text");
 
     const animation = [
-        { opacity: 1, offset: 0 },
-        { opacity: 0, offset: 0.4 },
-        { opacity: 0, offset: 0.6 },
-        { opacity: 1, offset: 1 },
+        {opacity: 1, offset: 0},
+        {opacity: 0, offset: 0.4},
+        {opacity: 0, offset: 0.6},
+        {opacity: 1, offset: 1},
     ];
 
     const sleep = async (ms) => new Promise(resolve => {
@@ -51,12 +45,12 @@ const year = now().getUTCFullYear();
 
 const range = (start, end, base, value) => {
     const keys = Array.from(
-        { length: end - start + 1 },
+        {length: end - start + 1},
         (_, i) => (start + i) % base
     );
 
     return keys.reduce(
-        (acc, cur) => ({ ...acc, [cur]: value }),
+        (acc, cur) => ({...acc, [cur]: value}),
         {}
     );
 }
@@ -124,7 +118,7 @@ const movableHolidays = {
 };
 
 // Combine fixed and movable holidays
-const holidays = { ...fixedHolidays, ...movableHolidays };
+const holidays = {...fixedHolidays, ...movableHolidays};
 
 
 const schedule = {
@@ -191,7 +185,7 @@ const contactLinks = document.querySelectorAll(".contact");
 for (const link of contactLinks) {
     link.addEventListener("click", (event) => {
         const day = now().getUTCDay();
-        const hour = now().getUTCHours();    
+        const hour = now().getUTCHours();
 
         const status = schedule[day][hour];
 
