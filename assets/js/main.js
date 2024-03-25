@@ -83,8 +83,21 @@ const translations = {
     }
     };
 
+document.getElementById('language-select').addEventListener('change', function() {
+    const selectedLanguage = this.value;
+    translatePage(selectedLanguage);
+    localStorage.setItem('selectedLanguage', selectedLanguage); // Remember the user's choice
+
+    // Adjust layout for RTL languages like Arabic
+    if (selectedLanguage === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+    } else {
+        document.body.setAttribute('dir', 'ltr');
+    }
+});
+
 function translatePage(lang) {
-    // Assuming your text content is within elements with IDs corresponding to translation keys
+    // Iterate over the translations object and update text content based on selected language
     for (const key in translations[lang]) {
         const element = document.getElementById(key);
         if (element) {
@@ -93,24 +106,10 @@ function translatePage(lang) {
     }
 }
 
-// Flag-based language selection
-document.querySelectorAll('.flag').forEach(flag => {
-    flag.addEventListener('click', function() {
-        const selectedLanguage = this.id;
-        translatePage(selectedLanguage);
-        localStorage.setItem('selectedLanguage', selectedLanguage); // Remember the user's choice
-        // Adjust layout for RTL languages like Arabic
-        if (selectedLanguage === 'ar') {
-            document.body.setAttribute('dir', 'rtl');
-        } else {
-            document.body.setAttribute('dir', 'ltr');
-        }
-    });
-});
-
 // Apply the translation based on saved preference or default language
 window.onload = () => {
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en'; // Default to English if no preference is saved
+    document.getElementById('language-select').value = savedLanguage;
     translatePage(savedLanguage);
 
     // Adjust layout for RTL languages like Arabic, based on the saved preference
