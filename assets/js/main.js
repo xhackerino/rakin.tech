@@ -1,5 +1,10 @@
 "use strict";
 
+const SLEEPING = "💤 Sleeping...";
+const BUSY = "⚠️ Busy. ⛔ Do Not Disturb";
+const AVAILABLE = "✅ Available for messaging, calls will be declined 📵";
+const WEEKEND = "✨ On a weekend. 📳 Enjoying real life 🏞️";
+const HOLIDAY = "🎉 It's a holiday! 🛫 Unavailable today, enjoying a great time with my family 👨‍👩‍👧‍👦️";
 const translations = {
     en: {
         pageTitle: "rakin.tech | Ilia Rakin",
@@ -84,14 +89,9 @@ const translations = {
 document.addEventListener('DOMContentLoaded', () => {
     const languageSelect = document.getElementById('language-select');
     const yearSpan = document.getElementById('year');
-    const statusContainer = document.getElementById('status');
-    const banner = document.querySelector('.banner');
-    const bannerButton = document.querySelector('.show-banner');
 
-    // Populate current year
     yearSpan.textContent = new Date().getFullYear();
 
-    // Handle language change
     languageSelect.addEventListener('change', function() {
         const selectedLanguage = this.value;
         translatePage(selectedLanguage);
@@ -99,78 +99,90 @@ document.addEventListener('DOMContentLoaded', () => {
         adjustLayoutForRTL(selectedLanguage);
     });
 
-    // Load saved language or default
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
     languageSelect.value = savedLanguage;
     translatePage(savedLanguage);
     adjustLayoutForRTL(savedLanguage);
 
-    // Update status based on the time and day
-    updateStatus();
-
-    // Initialize other interactive elements
     initCopyToClipboard();
     initBannerToggle();
+    initStatusUpdate();
 
     function translatePage(lang) {
-        for (const key in translations[lang]) {
-            const element = document.getElementById(key);
-            if (element) element.textContent = translations[lang][key];
-        }
-    }
-
-    function adjustLayoutForRTL(lang) {
-        document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-    }
-
-    function updateStatus() {
-            const now = new Date();
-            const day = now.getUTCDay();
-            const hour = now.getUTCHours();
-
-            const statusMessage = ""; // Initialize your status message base on the day and hour
-            // Example: if (day >= 1 && day <= 5 && hour >= 9 && hour < 17) { statusMessage = "Available"; }
-            // You'd need to implement the logic based on your schedule
-            if (statusContainer && statusMessage) {
-                statusContainer.textContent = statusMessage;
+            for (const key in translations[lang]) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = translations[lang][key];
+                }
             }
-    }
+        }
 
-    updateStatus();
-    setInterval(updateStatus, 60000);
-    
+        function adjustLayoutForRTL(lang) {
+            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        }
 
-    function initCopyToClipboard() {
-        document.querySelectorAll('.copy').forEach(element => {
-            element.addEventListener('click', () => {
-                navigator.clipboard.writeText(element.textContent.trim()).then(() => {
-                    showPopup("Address copied to clipboard!");
-                }, () => {
-                    showPopup("Failed to copy address.", true);
+        function initCopyToClipboard() {
+            document.querySelectorAll('.copy').forEach(element => {
+                element.addEventListener('click', () => {
+                    navigator.clipboard.writeText(element.textContent.trim()).then(() => {
+                        showPopup("Address copied to clipboard!");
+                    }, () => {
+                        showPopup("Failed to copy address.", true);
+                    });
                 });
             });
-        });
-    }
+        }
 
-    function initBannerToggle() {
-        bannerButton.addEventListener('click', () => banner.classList.toggle('show'));
-        banner.addEventListener('click', event => {
-            if (event.target === banner) banner.classList.remove('show');
-        });
-    }
+        function initBannerToggle() {
+            const banner = document.querySelector('.banner');
+            const bannerButton = document.querySelector('.show-banner');
+            bannerButton.addEventListener('click', () => banner.classList.toggle('show'));
+            banner.addEventListener('click', event => {
+                if (event.target === banner) {
+                    banner.classList.remove('show');
+                }
+            });
+        }
 
-    function showPopup(content, isError = false, durationMs = 3000) {
+        function showPopup(content, isError = false, durationMs = 3000) {
             const popup = document.querySelector(".popup");
             const popupText = document.querySelector(".popup-text");
             popupText.textContent = content;
-
-            if (isError) {
-                popup.classList.add("error");
-            } else {
-                popup.classList.remove("error");
-            }
-
+            popup.classList.toggle("error", isError);
             popup.classList.add("show");
             setTimeout(() => popup.classList.remove("show"), durationMs);
+        }
+
+        function initStatusUpdate() {
+            updateStatus();
+            setInterval(updateStatus, 60000); // Update every minute
+        }
+
+    function updateStatus() {
+        const now = new Date();
+        const day = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+        const hour = now.getHours(); // 0 to 23
+        const month = now.getMonth(); // 0 (January) to 11 (December)
+        const date = now.getDate(); // 1 to 31
+
+        // Example holiday: January 1st
+        const isHoliday = (month === 0 && date === 1);
+
+        let currentStatusMessage = AVAILABLE; // Default status
+
+        if (isHoliday) {
+            currentStatusMessage = HOLIDAY;
+        } else if (day === 0 || day === 6) {
+            currentStatusMessage = WEEKEND;
+        } else if (hour < 8 || hour >= 17) {
+            currentStatusMessage = SLEEPING;
+        } else {
+            currentStatusMessage = BUSY;
+        }
+
+        const statusContainer = document.getElementById("status");
+        if (statusContainer) {
+            statusContainer.textContent = currentStatusMessage;
+        }
     }
 });
