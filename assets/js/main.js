@@ -83,185 +83,94 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', () => {
     const languageSelect = document.getElementById('language-select');
-    languageSelect.addEventListener('change', handleLanguageChange);
+    const yearSpan = document.getElementById('year');
+    const statusContainer = document.getElementById('status');
+    const banner = document.querySelector('.banner');
+    const bannerButton = document.querySelector('.show-banner');
 
-    function handleLanguageChange() {
+    // Populate current year
+    yearSpan.textContent = new Date().getFullYear();
+
+    // Handle language change
+    languageSelect.addEventListener('change', function() {
         const selectedLanguage = this.value;
         translatePage(selectedLanguage);
         localStorage.setItem('selectedLanguage', selectedLanguage);
+        adjustLayoutForRTL(selectedLanguage);
+    });
 
-        // Adjust layout for RTL languages like Arabic
-        document.body.setAttribute('dir', selectedLanguage === 'ar' ? 'rtl' : 'ltr');
-    }
-    
-    function translatePage(lang) {
-            for (const key in translations[lang]) {
-                const element = document.getElementById(key);
-                if (element) {
-                    element.textContent = translations[lang][key];
-                }
-            }
-        }
-    
+    // Load saved language or default
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-    document.getElementById('language-select').value = savedLanguage;
+    languageSelect.value = savedLanguage;
     translatePage(savedLanguage);
-    document.body.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
-});
+    adjustLayoutForRTL(savedLanguage);
 
-// Apply the translation based on saved preference or default language
-window.onload = () => {
-    const savedLanguage = localStorage.getItem('selectedLanguage') || 'en'; // Default to English if no preference is saved
-    document.getElementById('language-select').value = savedLanguage;
-    translatePage(savedLanguage);
+    // Update status based on the time and day
+    updateStatus();
 
-    // Adjust layout for RTL languages like Arabic, based on the saved preference
-    if (savedLanguage === 'ar') {
-        document.body.setAttribute('dir', 'rtl');
-    } else {
-        document.body.setAttribute('dir', 'ltr');
-    }
-};
+    // Initialize other interactive elements
+    initCopyToClipboard();
+    initBannerToggle();
 
-const showPopup = (() => {
-    let timeoutId = null;
-    const popup = document.querySelector(".popup");
-    const popupText = document.querySelector(".popup-text");
-
-    const animation = [
-        { opacity: 1, offset: 0 },
-        { opacity: 0, offset: 0.4 },
-        { opacity: 0, offset: 0.6 },
-        { opacity: 1, offset: 1 },  
-    ];
-
-    const sleep = async (ms) => new Promise(resolve => {
-        setTimeout(resolve, ms);
-    });
-
-    return async (content, isError = false, durationMs = 3000) => {
-        if (timeoutId !== null) {
-            clearTimeout(timeoutId);
-            popupText.animate(animation, 300);
-            await sleep(150);
+    function translatePage(lang) {
+        for (const key in translations[lang]) {
+            const element = document.getElementById(key);
+            if (element) element.textContent = translations[lang][key];
         }
-
-        popupText.textContent = content;
-
-        if (isError) {
-            popup.classList.add("error");
-        } else {
-            popup.classList.remove("error");
-        }
-
-        await sleep(10);
-
-        popup.classList.add("show");
-
-        timeoutId = setTimeout(() => popup.classList.remove("show"), durationMs);
     }
-})();
 
-const now = () => new Date();
-
-const range = (start, end, base, value) => {
-    const keys = Array.from(
-        { length: end - start + 1 },
-        (_, i) => (start + i) % base
-    );
-
-    return keys.reduce(
-        (acc, cur) => ({ ...acc, [cur]: value }),
-        {}
-    );
-}
-
-const SLEEPING = "💤 Sleeping...";
-const BUSY = "⚠️ Busy. ⛔ Do Not Disturb";
-const AVAILABLE = "✅ Available for messaging, calls will be declined 📵";
-const WEEKEND = "✨ On a weekend. 📳 Enjoying real life 🏞️";
-const HOLYDAY = "🎉 It's a holyday! 🛫 Unavaliable today, enjoying a great time with my family 👨‍👩‍👧‍👦️";
-
-const schedule = {
-    ...range(1, 5, 7, {
-        ...range(0, 6, 24, {
-            message: SLEEPING,
-            dnd: true,
-        }),
-        ...range(7, 17, 24, {
-            message: BUSY,
-            dnd: false,
-        }),
-        ...range(18, 23, 24, {
-            message: AVAILABLE,
-            dnd: false,
-        }),
-        ...range()
-    }),
-    ...range(6, 7, 7, {
-        ...range(0, 23, 24, {
-            message: WEEKEND,
-            dnd: false
-        }),
-    }),
-};
-
-const statusContainer = document.querySelector("#status");
-
-setInterval(() => {
-    const day = now().getUTCDay();
-    const hour = now().getUTCHours();
-
-    const status = schedule[day][hour];
-    if (status !== statusContainer.textContent) {
-        statusContainer.textContent = status.message;
+    function adjustLayoutForRTL(lang) {
+        document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
     }
-}, 1000);
 
-const copyElements = document.querySelectorAll(".copy");
+    function updateStatus() {
+            const now = new Date();
+            const day = now.getUTCDay();
+            const hour = now.getUTCHours();
 
-for (const element of copyElements) {
-    element.addEventListener("click", () => {
-        navigator.clipboard.writeText(element.textContent.trim());
-        showPopup("Address copied to clipboard!");
-    });
-}
+            const statusMessage = ""; // Initialize your status message base on the day and hour
+            // Example: if (day >= 1 && day <= 5 && hour >= 9 && hour < 17) { statusMessage = "Available"; }
+            // You'd need to implement the logic based on your schedule
+            if (statusContainer && statusMessage) {
+                statusContainer.textContent = statusMessage;
+            }
+    }
 
-const contactLinks = document.querySelectorAll(".contact");
+    updateStatus();
+    setInterval(updateStatus, 60000);
+    
 
-for (const link of contactLinks) {
-    link.addEventListener("click", (event) => {
-        const day = now().getUTCDay();
-        const hour = now().getUTCHours();    
+    function initCopyToClipboard() {
+        document.querySelectorAll('.copy').forEach(element => {
+            element.addEventListener('click', () => {
+                navigator.clipboard.writeText(element.textContent.trim()).then(() => {
+                    showPopup("Address copied to clipboard!");
+                }, () => {
+                    showPopup("Failed to copy address.", true);
+                });
+            });
+        });
+    }
 
-        const status = schedule[day][hour];
+    function initBannerToggle() {
+        bannerButton.addEventListener('click', () => banner.classList.toggle('show'));
+        banner.addEventListener('click', event => {
+            if (event.target === banner) banner.classList.remove('show');
+        });
+    }
 
-        if (status.dnd) {
-            event.preventDefault();
-            showPopup("Please, contact me later. I'm sleeping", true)
-        }
-    })
-}
+    function showPopup(content, isError = false, durationMs = 3000) {
+            const popup = document.querySelector(".popup");
+            const popupText = document.querySelector(".popup-text");
+            popupText.textContent = content;
 
-const yearSpan = document.querySelector("#year");
-yearSpan.textContent = now().getUTCFullYear();
+            if (isError) {
+                popup.classList.add("error");
+            } else {
+                popup.classList.remove("error");
+            }
 
-const banner = document.querySelector(".banner");
-
-const showBanner = () => {
-    banner.classList.add("show");
-}
-
-const hideBanner = () => {
-    banner.classList.remove("show");
-}
-
-banner.addEventListener("click", (event) => {
-    if (event.target === banner) {
-        hideBanner();
+            popup.classList.add("show");
+            setTimeout(() => popup.classList.remove("show"), durationMs);
     }
 });
-
-const bannerButton = document.querySelector(".show-banner");
-
-bannerButton.addEventListener("click", () => showBanner());
