@@ -13,59 +13,58 @@
 </head>
 
 <body>
-    <select id="language-select" style="position: fixed; top: 0; right: 0;">
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-            <option value="ar">العربية</option>
-            <option value="de">Deutsch</option>
-            <option value="ru">Русский</option>
-        </select>
+    <div id="language-select" style="position: fixed; top: 0; right: 0;">
+        <span id="en" class="flag">🇬🇧</span>
+        <span id="fr" class="flag">🇫🇷</span>
+        <span id="es" class="flag">🇪🇸</span>
+        <span id="ar" class="flag">🇦🇪</span>
+        <span id="de" class="flag">🇩🇪</span>
+        <span id="ru" class="flag">🇷🇺</span>
+    </div>
 <main class="container-lg px-3 my-5 markdown-body">
     <article>
         <h1 id="greeting">👋 Hello!</h1>
 
-        <div>
-            This is the homepage of
-            <mark class="show-banner" id="iliaRakin">
-                Ilia Rakin
-            </mark>
+        <div id="homepageText">
+                    This is the homepage of
+                    <mark class="show-banner" id="iliaRakinHighlight">
+                        Ilia Rakin
+                    </mark>
         </div>
 
         <br/>
 
-        <div>
-            Right now I’m:&nbsp;
-            <span id="status">
-                    ⏳ Checking the schedule...
-                </span>
-        </div>
+        <div id="currentStatusText">
+                    Right now I’m:&nbsp;
+                    <span id="status">
+                            ⏳ Checking the schedule...
+                        </span>
+                </div>
 
+                <h2 id="contactMeTitle">💬 Contact Me</h2>
 
-        <h2 id="contactMe">💬 Contact Me</h2>
+                <div id="gmailContact">
+                    📩 Gmail:
+                    <a class="contact" href="mailto:rakinilia@gmail.com" target="_blank">
+                        rakinilia@gmail.com
+                    </a>
+                </div>
 
-        <div>
-            📩 Gmail:
-            <a class="contact" href="mailto:rakinilia@gmail.com" target="_blank">
-                rakinilia@gmail.com
-            </a>
-        </div>
+                <div id="corporateContact">
+                    🎓 Corporate:
+                    <a class="contact" href="mailto:ilia.rakin@student.lab.fi" target="_blank">
+                        ilia.rakin@student.lab.fi
+                    </a>
+                </div>
 
-        <div>
-            🎓 Corporate:
-            <a class="contact" href="mailto:ilia.rakin@student.lab.fi" target="_blank">
-                ilia.rakin@student.lab.fi
-            </a>
-        </div>
+                <div id="telegramContact">
+                    📩 Telegram (Business related issues <u>ONLY</u>):
+                    <a class="contact" href="https://t.me/xhackerino" target="_blank">
+                        @xhackerino
+                    </a>
+                </div>
 
-        <div>
-            📩 Telegram (Business related issues <u>ONLY</u>):
-            <a class="contact" href="https://t.me/xhackerino" target="_blank">
-                @xhackerino
-            </a>
-        </div>
-
-        <h2>👀 See Also</h2>
+        <h2 id="seeAlsoTitle">👀 See Also</h2>
 
         <div>
             📷 Instagram:
@@ -178,16 +177,16 @@
     </article>
 
     <footer>
-        <div>
-            Rakin Ilia, <span id="year"></span>
-        </div>
+            <div id="footerText">
+                Rakin Ilia, <span id="year"></span>
+            </div>
 
-        <div>
-            Inspired by
-            <a href="https://t.me/terislabendzski">🇵🇱 Teris Labendszki</a>
-            &
-            <a href="https://cringouli.cc/">🇺🇦 Stepan Tikunov</a>
-        </div>
+            <div id="inspirationText">
+                Inspired by
+                <a href="https://t.me/terislabendzski">🇵🇱 Teris Labendszki</a>
+                &
+                <a href="https://cringouli.cc/">🇺🇦 Stepan Tikunov</a>
+            </div>
     </footer>
 
     <div class="popup">
