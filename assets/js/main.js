@@ -4,93 +4,84 @@
 
 const translations = {
     en: {
+        pageTitle: "rakin.tech | Ilia Rakin",
         greeting: "👋 Hello!",
-        contactMe: "💬 Contact Me",
-        gmail: "📩 Gmail:",
-        corporate: "🎓 Corporate:",
-        telegram: "📩 Telegram (Business related issues ONLY):",
-        seeAlso: "👀 See Also",
-        instagram: "📷 Instagram:",
-        vk: "🇷🇺 VK:",
-        linkedIn: "🇫🇮 LinkedIn:",
-        gitHub: "👨‍💻 GitHub:",
-        wallets: "💰 Wallets",
-        // Add other translations here
+        homepageText: "This is the homepage of Ilia Rakin.",
+        currentStatusText: "Right now I’m: ⏳ Checking the schedule...",
+        contactMeTitle: "💬 Contact Me",
+        gmailContact: "📩 Gmail:",
+        corporateContact: "🎓 Corporate:",
+        telegramContact: "📩 Telegram (Business related issues ONLY):",
+        seeAlsoTitle: "👀 See Also",
+        footerText: "Rakin Ilia",
+        inspirationText: "Inspired by 🇵🇱 Teris Labendszki & 🇺🇦 Stepan Tikunov",
     },
     fr: {
+        pageTitle: "rakin.tech | Ilia Rakin",
         greeting: "👋 Bonjour!",
-        contactMe: "💬 Contactez-moi",
-        gmail: "📩 Gmail:",
-        corporate: "🎓 Entreprise:",
-        telegram: "📩 Telegram (Uniquement pour les questions professionnelles):",
-        seeAlso: "👀 Voir Aussi",
-        instagram: "📷 Instagram:",
-        vk: "🇷🇺 VK:",
-        linkedIn: "🇫🇮 LinkedIn:",
-        gitHub: "👨‍💻 GitHub:",
-        wallets: "💰 Portefeuilles",
-        // Add more translations here
+        homepageText: "Voici la page d'accueil d'Ilia Rakin.",
+        currentStatusText: "En ce moment, je suis : ⏳ En train de vérifier l'agenda...",
+        contactMeTitle: "💬 Contactez-moi",
+        gmailContact: "📩 Gmail:,
+        corporateContact: "🎓 Corporate:",
+        telegramContact: "📩 Telegram (Uniquement pour les questions professionnelles):",
+        seeAlsoTitle: "👀 Voir également",
+        footerText: "Rakin Ilia",
+        inspirationText: "Inspiré par 🇵🇱 Teris Labendszki & 🇺🇦 Stepan Tikunov",
     },
     es: {
+        pageTitle: "rakin.tech | Ilia Rakin",
         greeting: "👋 ¡Hola!",
-        contactMe: "💬 Contáctame",
-        gmail: "📩 Gmail:",
-        corporate: "🎓 Corporativo:",
-        telegram: "📩 Telegram (Solo para asuntos de negocios):",
-        seeAlso: "👀 Ver También",
-        instagram: "📷 Instagram:",
-        vk: "🇷🇺 VK:",
-        linkedIn: "🇫🇮 LinkedIn:",
-        gitHub: "👨‍💻 GitHub:",
-        wallets: "💰 Carteras",
-        // Add more translations here
+        homepageText: "Esta es la página de inicio de Ilia Rakin.",
+        currentStatusText: "Ahora mismo estoy: ⏳ Revisando el calendario...",
+        contactMeTitle: "💬 Contáctame",
+        gmailContact: "📩 Gmail:",
+        corporateContact: "🎓 Corporativo:",
+        telegramContact: "📩 Telegram (Solo para asuntos de negocios):",
+        seeAlsoTitle: "👀 Ver también",
+        footerText: "Rakin Ilia",
+        inspirationText: "Inspirado por 🇵🇱 Teris Labendszki & 🇺🇦 Stepan Tikunov",
     },
     ar: {
+        pageTitle: "rakin.tech | إيليا راكين",
         greeting: "👋 مرحبا!",
-        contactMe: "💬 اتصل بي",
-        gmail: "📩 جيميل:",
-        corporate: "🎓 الشركات:",
-        telegram: "📩 تلغرام (للقضايا المتعلقة بالأعمال فقط):",
-        seeAlso: "👀 انظر أيضا",
-        instagram: "📷 انستغرام:",
-        vk: "🇷🇺 VK:",
-        linkedIn: "🇫🇮 لينكدإن:",
-        gitHub: "👨‍💻 جيتهب:",
-        wallets: "💰 المحافظ",
-        // Add more translations here
+        homepageText: "هذه هي الصفحة الرئيسية لإيليا راكين.",
+        currentStatusText: "في الوقت الحالي أنا: ⏳ أتحقق من الجدول الزمني...",
+        contactMeTitle: "💬 اتصل بي",
+        gmailContact: "📩 Gmail:",
+        corporateContact: "🎓 الشركات:",
+        telegramContact: "📩 تلغرام (فقط للمسائل المتعلقة بالأعمال):",
+        seeAlsoTitle: "👀 انظر أيضا",
+        footerText: "راكين إيليا",
+        inspirationText: "مستوحى من 🇵🇱 تيريس لابيندزكي & 🇺🇦 ستيبان تيكونوف",
     },
     de: {
+        pageTitle: "rakin.tech | Ilia Rakin",
         greeting: "👋 Hallo!",
-        contactMe: "💬 Kontaktiere mich",
-        gmail: "📩 Gmail:",
-        corporate: "🎓 Firmen:",
-        telegram: "📩 Telegram (Nur für geschäftliche Angelegenheiten):",
-        seeAlso: "👀 Siehe Auch",
-        instagram: "📷 Instagram:",
-        vk: "🇷🇺 VK:",
-        linkedIn: "🇫🇮 LinkedIn:",
-        gitHub: "👨‍💻 GitHub:",
-        wallets: "💰 Geldbörsen",
-        // Add more translations here
+        homepageText: "Dies ist die Startseite von Ilia Rakin.",
+        currentStatusText: "Im Moment bin ich: ⏳ Beim Überprüfen meines Zeitplans...",
+        contactMeTitle: "💬 Kontaktiere mich",
+        gmailContact: "📩 Gmail:",
+        corporateContact: "🎓 Firmen:",
+        telegramContact: "📩 Telegram (Nur für geschäftliche Angelegenheiten): @xhackerino",
+        seeAlsoTitle: "👀 Siehe auch",
+        footerText: "Rakin Ilia",
+        inspirationText: "Inspiriert von 🇵🇱 Teris Labendszki & 🇺🇦 Stepan Tikunov",
     },
     ru: {
+        pageTitle: "rakin.tech | Илья Ракин",
         greeting: "👋 Привет!",
-        contactMe: "💬 Свяжитесь со мной",
-        gmail: "📩 Gmail:",
-        corporate: "🎓 Корпоративный:",
-        telegram: "📩 Телеграмм (Только по деловым вопросам):",
-        seeAlso: "👀 Смотрите также",
-        instagram: "📷 Инстаграм:",
-        vk: "🇷🇺 ВК:",
-        linkedIn: "🇫🇮 LinkedIn:",
-        gitHub: "👨‍💻 GitHub:",
-        wallets: "💰 Кошельки",
-        // Add more translations here
-    },
-    // Add more languages as needed
-};
-
-// Add this after your translations object
+        homepageText: "Это визитная карточка Ильи Ракина.",
+        currentStatusText: "Сейчас я: ⏳ Проверяю расписание...",
+        contactMeTitle: "💬 Связаться со мной",
+        gmailContact: "📩 Почта Гугл:",
+        corporateContact: "🎓 Корпоративная:",
+        telegramContact: "📩 Телеграмм (Только для деловых вопросов):",
+        seeAlsoTitle: "👀 Смотрите также",
+        footerText: "Ракин Илья",
+        inspirationText: "Вдохновлялся 🇵🇱 Терисом Лабендзки и 🇺🇦 Степаном Тикуновым",
+    }
+    };
 
 function translatePage(lang) {
     // Assuming your text content is within elements with IDs corresponding to translation keys
@@ -102,24 +93,32 @@ function translatePage(lang) {
     }
 }
 
-// Listen for changes on the language select dropdown
-document.getElementById('language-select').addEventListener('change', function() {
-    const selectedLanguage = this.value;
-    translatePage(selectedLanguage);
-    localStorage.setItem('selectedLanguage', selectedLanguage); // Remember the user's choice
-    // Adjust layout for RTL languages like Arabic
+// Flag-based language selection
+document.querySelectorAll('.flag').forEach(flag => {
+    flag.addEventListener('click', function() {
+        const selectedLanguage = this.id;
+        translatePage(selectedLanguage);
+        localStorage.setItem('selectedLanguage', selectedLanguage); // Remember the user's choice
+        // Adjust layout for RTL languages like Arabic
         if (selectedLanguage === 'ar') {
             document.body.setAttribute('dir', 'rtl');
         } else {
             document.body.setAttribute('dir', 'ltr');
         }
+    });
 });
 
 // Apply the translation based on saved preference or default language
 window.onload = () => {
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en'; // Default to English if no preference is saved
-    document.getElementById('language-select').value = savedLanguage;
     translatePage(savedLanguage);
+
+    // Adjust layout for RTL languages like Arabic, based on the saved preference
+    if (savedLanguage === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+    } else {
+        document.body.setAttribute('dir', 'ltr');
+    }
 };
 
 const showPopup = (() => {
