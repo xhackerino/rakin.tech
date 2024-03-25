@@ -1,7 +1,5 @@
 "use strict";
 
-"use strict";
-
 const translations = {
     en: {
         pageTitle: "rakin.tech | Ilia Rakin",
@@ -83,28 +81,33 @@ const translations = {
     }
     };
 
-document.getElementById('language-select').addEventListener('change', function() {
-    const selectedLanguage = this.value;
-    translatePage(selectedLanguage);
-    localStorage.setItem('selectedLanguage', selectedLanguage); // Remember the user's choice
+document.addEventListener('DOMContentLoaded', () => {
+    const languageSelect = document.getElementById('language-select');
+    languageSelect.addEventListener('change', handleLanguageChange);
 
-    // Adjust layout for RTL languages like Arabic
-    if (selectedLanguage === 'ar') {
-        document.body.setAttribute('dir', 'rtl');
-    } else {
-        document.body.setAttribute('dir', 'ltr');
+    function handleLanguageChange() {
+        const selectedLanguage = this.value;
+        translatePage(selectedLanguage);
+        localStorage.setItem('selectedLanguage', selectedLanguage);
+
+        // Adjust layout for RTL languages like Arabic
+        document.body.setAttribute('dir', selectedLanguage === 'ar' ? 'rtl' : 'ltr');
     }
-});
-
-function translatePage(lang) {
-    // Iterate over the translations object and update text content based on selected language
-    for (const key in translations[lang]) {
-        const element = document.getElementById(key);
-        if (element) {
-            element.textContent = translations[lang][key];
+    
+    function translatePage(lang) {
+            for (const key in translations[lang]) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = translations[lang][key];
+                }
+            }
         }
-    }
-}
+    
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    document.getElementById('language-select').value = savedLanguage;
+    translatePage(savedLanguage);
+    document.body.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
+});
 
 // Apply the translation based on saved preference or default language
 window.onload = () => {
